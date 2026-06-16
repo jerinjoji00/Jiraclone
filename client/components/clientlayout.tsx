@@ -1,7 +1,9 @@
 import React from 'react'
 
 const clientlayout = () => {
-    contant[is AuthenticatorAssertionResponse]
+    contant[is Authenicated, setIsAuthenticated] = useState(false)
+    contant[authuser, setAuthUser] = useState(null)
+    
   return (
     <div>clientlayout</div>
   )
