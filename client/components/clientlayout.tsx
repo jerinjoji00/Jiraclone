@@ -1,10 +1,10 @@
 import React from 'react'
-
+import { useState } from 'react'
 const clientlayout = () => {
-    contant[is authen
-  return (
-    <div>clientlayout</div>
-  )
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean |null>(true);
+    return (
+        <div>clientlayout</div>
+    )
 }
 
 export default clientlayout
