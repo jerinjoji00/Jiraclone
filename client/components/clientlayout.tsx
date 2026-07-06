@@ -1,8 +1,8 @@
 "use client";
 
-import { Sidebar } from 'lucide-react';
 import React from 'react'
 import { useState } from 'react'
+import Sidebar from './sidebar'
 const clientlayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(true);
     if (isAuthenticated === null) {
