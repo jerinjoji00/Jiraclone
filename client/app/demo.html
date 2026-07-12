@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jira Clone - Kanban Board</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter for that clean Jira look -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="typography">
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+<style data-purpose="custom-layout">
+    /* Custom height for main container to fill viewport */
+    .app-container {
+      height: 100vh;
+      display: flex;
+    }
+    /* Scrollbar styling for a cleaner look */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #e2e8f0;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-800">
+<!-- BEGIN: Main App Container -->
+<div class="app-container" data-purpose="main-wrapper">
+<!-- BEGIN: Left Sidebar -->
+<aside class="w-64 border-r border-slate-200 flex flex-col bg-[#f4f5f7]" data-purpose="sidebar">
+<!-- Sidebar Top Section -->
+<div class="p-4 space-y-6">
+<!-- Brand Logo -->
+<div class="flex items-center gap-2 px-2" data-purpose="branding">
+<div class="bg-blue-600 p-1.5 rounded-md">
+<svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19 20 15.19 20 10.5 16.19 2 11.5 2zm0 14.5c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path></svg>
+</div>
+<span class="font-bold text-xl text-slate-700">Jira Clone</span>
+</div>
+<!-- Project Selector -->
+<div class="relative px-2">
+<button class="w-full flex items-center justify-between p-2 hover:bg-slate-200 rounded transition-colors text-sm font-medium">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+<span>Platform Services</span>
+</div>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<!-- Search Bar -->
+<div class="px-2">
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+<svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<input class="w-full pl-9 pr-4 py-2 bg-white border border-slate-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="space-y-1" data-purpose="main-nav">
+<a class="flex items-center gap-3 px-2 py-2 text-sm font-medium bg-slate-200 text-blue-600 rounded" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Kanban Board
+          </a>
+<a class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200 rounded" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Backlog
+          </a>
+<a class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200 rounded" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Projects
+          </a>
+<a class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200 rounded" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Team
+          </a>
+<a class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200 rounded" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Profile
+          </a>
+</nav>
+</div>
+<!-- Sidebar Bottom Section -->
+<div class="mt-auto p-4 space-y-4">
+<!-- User Profile -->
+<div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex items-center gap-3">
+<img alt="Jane Smith Avatar" class="w-10 h-10 rounded-full bg-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOMkZ5gWEvk_e68q-BdOQ7dvc6P64y9mxjdOudRT8q8fSzE2AVN7jAAsMW5OI5NYVJkk30msv2mMA5UZyXXucBwRygIlM31ORAjA7KTseXfog0Ddd7HbgzrE-wAy6MDOW-IWfhVYHHxygaMIvJDy5IFoeHbQ9UnDEwMqZpaNCJnltaUqz_vL_ut2_NWat69I0FuKViNhLpj6R2wpqkEtBt5hMUAo9lHwK1qbJHWLDbtscleodCcxub4VyLi9ysQyU2I8nb93Pzuz2k"/>
+<div class="overflow-hidden">
+<p class="text-sm font-semibold truncate">Jane Smith</p>
+<p class="text-xs text-slate-500 truncate">jane@example.com</p>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md flex items-center justify-center gap-2 transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 6v6m0 0v6m0-6h6m-6 0H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Create Issue
+        </button>
+<!-- Logout -->
+<div class="flex items-center gap-2 px-2 text-slate-600 cursor-pointer hover:text-slate-900 transition-colors">
+<div class="w-8 h-8 bg-slate-800 text-white rounded-full flex items-center justify-center text-xs">N</div>
+<span class="text-sm font-medium">Log out</span>
+</div>
+</div>
+</aside>
+<!-- END: Left Sidebar -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-white" data-purpose="main-content">
+<!-- Top Header & Toolbar -->
+<header class="p-6 pb-0" data-purpose="content-header">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 text-slate-500 text-sm mb-4">
+<span>Projects</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Platform Services</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-slate-800">Kanban Board</span>
+</div>
+<!-- Page Title & Actions -->
+<div class="flex items-center justify-between mb-6">
+<h1 class="text-2xl font-bold text-slate-700">Kanban Board</h1>
+<div class="flex items-center gap-4 text-slate-500">
+<svg class="w-5 h-5 cursor-pointer hover:text-slate-800" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<svg class="w-5 h-5 cursor-pointer hover:text-slate-800" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Filters Bar -->
+<div class="flex items-center gap-4 mb-8">
+<div class="flex -space-x-2">
+<img alt="User 1" class="w-8 h-8 rounded-full border-2 border-white bg-slate-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFVCeNvSATfLMsvEqZorIV-NkjTTLaROZtQxa4SiTqhF8XgiWLuSCq90vjtVXSgPzDT9H_ALaUnqPGUuxesyqdF228bLlsycWyF9EM63FmTNuIR9KwfrQnl-FLVA0DlxInCue1hJTQvNochwShBjuPTGQSbk8c6q2ZqBAoWXb8LD2Kic636-1gcqH_QYFw__Wj7RJEyFhoEiH4RvdQz4PiU0pj17IXFogNOLVHc84aDrn5l0lT7Rdq9gZANbpSjlIS0Lg6c_mCdk67"/>
+<img alt="User 2" class="w-8 h-8 rounded-full border-2 border-white bg-slate-400" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChsoosW0hr6FXzhKYZQNLOuiH3n0ilcklrYeISNsiRs9ZaKMhLe5lAuvBU--SB449ynavljzVj67NS-aYVldp9w5tJ2fMpBvKpsdImYf_-DnHC1pO-GVLZKkdoz3xCnwZn5eSvEr0wYhUh8qy2kUpsXxaoysbBZ0d9k4sUqA8khyLjXYbqmBPvgT_WnsVIAxm6B1NNyG_MPPTPMwKv1If4-L-eWtnhAbiHGBZzUPRlUTcx-nKT30TG8ubUO3bW55j7yjdpz5uyUYf4"/>
+<img alt="User 3" class="w-8 h-8 rounded-full border-2 border-white bg-slate-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADlm9iiUJnjWZG9fxuEWs697YCLaiYaqalSdxyCq88g6sHpo2dpjBB11AUkCBykG8K7evyJdMSVRcoRqYJHCjR-MmwIcXLWgvq9ijK_gmtiEIsAnwdxTBPNyXx6u1my2uVOm5c3OB0GGd49X1BlRx3gs7V9SKHUdDSO2BAaV134kWtrfDcMViNf9dtObTiCabRFfR7gDC_l5QzOPKeQ0KAU6gWN7aRp2AM31w6dqYGubyJS5TUoCJjQsrnIMIUe92vQJbd9CMzXb9R"/>
+<img alt="User 4" class="w-8 h-8 rounded-full border-2 border-white bg-slate-600" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP24Jgrqw7bn1mOUUGl5zcfaodv9ykL45idTeSD7Bo7QheqCJ33xOtNYUXvb1m1ZFGnztoXeRQkcsvbQOH1Q1bCxDysHJMcrV5OfsDav8YrCWCCNlkK-jK35Bkm6UZir_UCm4ZqADhjqxHbNLabNjUCtm5Dt2_oZShDN-u3IBVRNlqs3byFVecfhxMUNmkILuAwv_S5LM25lQHByEFL0HOFTsGm-BUbb62N8Buq5txA4UfjKPgkjRJmpBA0jMNgOs1ampu3MNSjjFy"/>
+</div>
+<button class="px-4 py-1.5 text-sm font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded transition-colors">Only My Issues</button>
+<button class="px-4 py-1.5 text-sm font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded transition-colors">Recently Updated</button>
+</div>
+</header>
+<!-- Kanban Grid -->
+<section class="flex-1 p-6 pt-0 overflow-x-auto" data-purpose="kanban-grid">
+<div class="flex gap-6 h-full min-w-max">
+<!-- Column: TO DO -->
+<div class="w-80 flex flex-col rounded-md bg-[#f4f5f7] p-3" data-purpose="column-todo">
+<h2 class="text-xs font-bold text-slate-500 uppercase px-1 mb-4 tracking-wider">TO DO (0)</h2>
+<div class="flex-1 flex flex-col gap-3">
+<!-- Empty State -->
+</div>
+</div>
+<!-- Column: IN PROGRESS -->
+<div class="w-80 flex flex-col rounded-md bg-[#f4f5f7] p-3" data-purpose="column-in-progress">
+<h2 class="text-xs font-bold text-slate-500 uppercase px-1 mb-4 tracking-wider">IN PROGRESS (1)</h2>
+<div class="flex-1 flex flex-col gap-3">
+<!-- Card: wqfqwf -->
+<div class="bg-white p-4 rounded-md shadow-sm border border-slate-200 hover:shadow-md transition-shadow cursor-grab">
+<p class="text-sm font-medium mb-4 text-slate-800">wqfqwf</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-red-500 rounded-sm"></div>
+<span class="text-xs font-medium text-slate-500 uppercase">PS-1</span>
+</div>
+<span class="bg-yellow-100 text-yellow-700 text-[10px] font-bold px-2 py-0.5 rounded tracking-wide">MEDIUM</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: DONE -->
+<div class="w-80 flex flex-col rounded-md bg-[#f4f5f7] p-3" data-purpose="column-done">
+<h2 class="text-xs font-bold text-slate-500 uppercase px-1 mb-4 tracking-wider">DONE (1)</h2>
+<div class="flex-1 flex flex-col gap-3">
+<!-- Card: yhmgk -->
+<div class="bg-white p-4 rounded-md shadow-sm border border-slate-200 hover:shadow-md transition-shadow cursor-grab">
+<p class="text-sm font-medium mb-4 text-slate-800">yhmgk</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-purple-500 rounded-sm"></div>
+<span class="text-xs font-medium text-slate-500 uppercase">PS-2</span>
+</div>
+<span class="bg-yellow-100 text-yellow-700 text-[10px] font-bold px-2 py-0.5 rounded tracking-wide">MEDIUM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Kanban Grid -->
+</main>
+<!-- END: Main Content Area -->
+</div>
+<!-- END: Main App Container -->
+<!-- JavaScript for Placeholder Interaction -->
+<script data-purpose="demo-interactivity">
+    // Simple script to handle some clicks if needed, currently just for structure
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('Jira Board UI Loaded');
+    });
+  </script>
+</body></html>
